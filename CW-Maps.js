@@ -20,13 +20,13 @@ define( ["qlik", "text!./template.html",'//unpkg.com/leaflet@1.5.1/dist/leaflet.
 				items: {
 					dimensions: {
 						uses: "dimensions",
-						min: 1,
+						min: 3,
 						max: 3
 					},
 					measures: {
 						uses: "measures",
-						min: 2,
-						max: 5
+						min: 1,
+						max: 2
 					},
 					settings:{
 						uses: "settings",
@@ -55,31 +55,35 @@ define( ["qlik", "text!./template.html",'//unpkg.com/leaflet@1.5.1/dist/leaflet.
 						ref:"beginZoomLevel",
 						label: "Begin Zoom Level",
 						type: "string",
-						defaultValue:"13"						
+						defaultValue:"13",
+						expression: "always"						
 						},
 						beginningCenterLatitude:{
 						ref:"beginCenterLatitude",
 						label: "Begin Center Latitude",
 						type: "string",
-						defaultValue:"0"						
+						defaultValue:"0",
+						expression: "always"						
 						},
 						beginningCenterLongitude:{
 						ref:"beginCenterLongitude",
 						label: "Begin Center Longitude",
 						type: "string",
-						defaultValue:"0"						
+						defaultValue:"0",
+						expression: "always"						
 						},
 						maxZoomLevel:{
 						ref:"maxZoomLevel",
 						label: "Max Zoom Level",
 						type: "string",
-						defaultValue:"13"						
+						defaultValue:"13",
+						expression: "always"						
 						},
 						markerSize:{
 						ref:"markerSize",
 						label: "Marker Size",
 						type: "string",
-						defaultValue:"5"						
+						defaultValue:"5"					
 						},
 						markerColor:{
 						ref:"markerColor",
@@ -119,26 +123,7 @@ define( ["qlik", "text!./template.html",'//unpkg.com/leaflet@1.5.1/dist/leaflet.
 						zoom: parseInt(this.$scope.layout.beginZoomLevel),
 						layers: [baseLayer,this.$scope.markersLayer]});
 						
-						console.log(this.$scope.markersLayer)
 						
-						
-						/*var baseLayers = {							
-							"Streets": baseLayer
-						};
-
-						var overlays = {
-							"markers": markersLayer
-						};
-
-						
-						L.control.layers(overlays).addTo(this.$scope.mymap);
-						
-						var mymap= this.$scope.mymap
-
-						mymap.eachLayer(function (layer) {
-							mymap.removeLayer(layer);
-						});*/
-
 			
 				}
 				
@@ -150,8 +135,8 @@ define( ["qlik", "text!./template.html",'//unpkg.com/leaflet@1.5.1/dist/leaflet.
 						for (var i =0; i<d.length;i++)
 						{
 							var fColor =  this.$scope.layout.markerColor;
-							if (d[i].length=6){
-								fColor= d[i][5].qText
+							if (d[i].length=5){
+								fColor= d[i][4].qText
 							}
 
 							//var marker = L.marker([d[i][1].qNum,d[i][2].qNum ]).addTo(mymap);
